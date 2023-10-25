@@ -1,59 +1,57 @@
 import java.util.Scanner;
-class Student{
-    int number;
-    public int getNumber() {
-        return number;
-    }
-    public void setNumber(int number) {
-        this.number = number;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    protected String name;
 
-    public String getMajor() {
-        return major;
-    }
-    public void setMajor(String name) {
-        this.major = major;
-    }
-    protected String major;
+class Student {
+    private int studentId;
+    private String name;
+    private String major;
+    private int telNum;
 
-    int phone_num;
-    public int getPhone_num() {
-        return phone_num;
+    public void setStudentId(int studentId) { this.studentId = studentId; } //this = 객체의 멤버변수
+    public void setName(String name) { this.name = name; }
+    public void setMajor(String major) { this.major = major; }
+    public void setTelNum(String telNum) { this.telNum = Integer.parseInt(telNum); }
+    public int getStudentId()
+    {
+        return studentId;
     }
-    public void setPhone_num(int phone_num) {
-        this.phone_num = phone_num;
+    public String getName() { return name; }
+    public String getMajor() { return major; }
+    public String getTelNum()
+    {
+        String strTelNum = '0' + Integer.toString(telNum);
+        return strTelNum.substring(0, 3) + '-' + strTelNum.substring(3, 7) + '-' +
+                strTelNum.substring(7, 11);
     }
+
 }
-public class homework2 extends Student{
-    public String lab;
 
-    public homework2() {
-        super.getName();
-        super.getNumber();
-        super.getMajor();
-        super.getPhone_num();
-    }
-
+public class Homework2 {
     public static void main(String[] args) {
-        System.out.println("학생의 학번, 이름, 전공, 전화번호를 입력하세요: ");
-
         Scanner sc = new Scanner(System.in);
-        homework2 obj = new homework2();
+        final int NUM_STRUDENT = 3;
+        Student[] student = new Student[NUM_STRUDENT];
+        for (int i=0; i<NUM_STRUDENT; i++)
+        {
+            student[i] = new Student();
+            System.out.print("학생의 학번, 이름, 전공, 전화번호를 입력하세요: ");
+            student[i].setStudentId(sc.nextInt());
+            student[i].setName(sc.next());
+            student[i].setMajor(sc.next());
+            student[i].setTelNum(sc.next());
 
-        int number = sc.nextInt();
-        long phone_num = sc.nextLong();
-        String name = sc.nextLine();
-        String major = sc.nextLine();
+        }
+        System.out.println("\n입력된 학생들의 정보는 다음과 같습니다.");
 
-        System.out.println("입력된 학생들의 정보는 다음과 같습니다");
-        System.out.printf("첫번째 학생: %d %c %c %l", obj.number, obj.name, obj.major, obj.phone_num);
+        for(int i=0; i<NUM_STRUDENT; i++)
+        {
+            //문제와 약간 다르게 첫번째, 두번째, 세번대 대신 1
+            System.out.print(i+1 + "번째 학생: ");
+            System.out.print(student[i].getStudentId());
+            System.out.print(" " + student[i].getName());
+            System.out.print(" " + student[i].getMajor());
+            System.out.print(" " + student[i].getTelNum());
+            System.out.print("\n");
+        }
 
     }
 }
